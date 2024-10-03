@@ -1,9 +1,9 @@
-const { uploadPhoto, createUser } = require('./utils');
+import { uploadPhoto, createUser } from './utils';
 
 const handleProfileSignup = async () => {
   try {
-    const userData = await createUser();
     const photoData = await uploadPhoto();
+    const userData = await createUser();
 
     console.log(`${photoData.body} ${userData.firstName} ${userData.lastName}`);
   } catch (error) {
