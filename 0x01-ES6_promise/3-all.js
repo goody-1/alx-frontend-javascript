@@ -1,14 +1,14 @@
-const { uploadPhoto } = require('./utils');
-const { createUser } = require('./utils');
+const { uploadPhoto, createUser } = require('./utils');
 
-const handleProfileSignup = () => {
-  uploadPhoto()
-    .then((photoData) => {
-      createUser(photoData)
-        .then((data) => console.log(photoData.body, data.firstName, data.lastName))
-        .catch(() => console.log('Signup system offline'));
-    })
-    .catch(() => console.log('Signup system offline'));
+const handleProfileSignup = async () => {
+  try {
+    const userData = await createUser();
+    const photoData = await uploadPhoto();
+
+    console.log(`${photoData.body} ${userData.firstName} ${userData.lastName}`);
+  } catch (error) {
+    console.log('Signup system offline');
+  }
 };
 
 export default handleProfileSignup;
